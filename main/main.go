@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/bwmarrin/discordgo"
-	"github.com/joho/godotenv"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/joho/godotenv"
 )
 
 var (
@@ -28,7 +28,7 @@ func main() {
 	if discordToken == "" {
 		log.Fatalf("Токен Discord не найдены в .env файле")
 	} else {
-		DSBot()
+
 	}
 
 	if telegramToken == "" {
@@ -43,23 +43,4 @@ func main() {
 	<-stop
 
 	log.Println("Завершена")
-}
-
-func DSBot() {
-	dg, err := discordgo.New("Bot " + discordToken)
-
-	// Информация статуса бота
-	dg.AddHandler(func(dg *discordgo.Session, r *discordgo.Ready) {
-		log.Println("Бот запустился")
-	})
-	// Обработка ошибок сессии
-	if err != nil {
-		log.Fatal("Ошибка при создании сессии Discord: ", err)
-		return
-	}
-
-	err = dg.Open()
-	if err != nil {
-		log.Fatal("Ошибка при подключении к Discord: ", err)
-	}
 }
