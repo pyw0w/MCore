@@ -7,6 +7,8 @@ import (
 	"syscall"
 
 	DBot "MiniCore/Core/Discord"
+	TBot "MiniCore/Core/Telegram"
+	CMD "MiniCore/cmd/telegram"
 	"github.com/joho/godotenv"
 )
 
@@ -36,12 +38,16 @@ func main() {
 		log.Fatalf("Токен Discord не найдены в .env файле")
 	} else {
 		DBot.Connect(discordToken)
+
+		DBot.Start()
 	}
 
 	if telegramToken == "" {
 		log.Fatalf("Токен Telegram не найдены в .env файле")
 	} else {
+		TBot.Connect(telegramToken)
 
+		TBot.Start(CMD.Start)
 	}
 
 	// Обработка CTRL + C
@@ -49,5 +55,5 @@ func main() {
 	signal.Notify(stop, syscall.SIGINT, syscall.SIGINT, os.Interrupt)
 	<-stop
 
-	log.Println("Завершена")
+	log.Println("RIP")
 }

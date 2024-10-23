@@ -12,36 +12,36 @@ var (
 )
 
 func Connect(token string) {
-	// Create a new Discord session using the provided bot token.
+	// Создаем новую сессию Discord с использованием предоставленного токена бота.
 	var err error
 	Session, err = discordgo.New("Bot " + token)
 
 	if err != nil {
-		log.Println("error creating Discord session,", err)
+		log.Println("Ошибка при создании сессии Discord:", err)
 		return
 	}
 
-	// Get the account information.
+	// Получаем информацию об аккаунте.
 	u, err := Session.User("@me")
 	if err != nil {
-		log.Println("error obtaining account details,", err)
+		log.Println("Ошибка при получении данных об аккаунте:", err)
 	}
 
-	// Store the account ID for later use.
+	// Сохраняем ID аккаунта для дальнейшего использования.
 	BotID = u.ID
 
-	log.Println("Bot connected")
+	log.Println("Бот подключен")
 }
 
 func Start() {
-	// Open the websocket and begin listening.
+	// Открываем вебсокет и начинаем прослушивание.
 	err := Session.Open()
 	if err != nil {
-		log.Println("error opening connection,", err)
+		log.Println("Ошибка при открытии соединения:", err)
 		return
 	}
 
-	log.Println("Bot is now running.  Press CTRL-C to exit.")
+	log.Println("Бот работает. Нажмите CTRL-C для выхода.")
 
 	return
 }
