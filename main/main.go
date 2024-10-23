@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	DBot "MiniCore/Core/Discord"
 	"github.com/joho/godotenv"
 )
 
@@ -13,6 +14,12 @@ var (
 	discordToken  string
 	telegramToken string
 )
+
+var version = "undefined"
+
+func init() {
+	log.Println("Starting Server Status " + version)
+}
 
 func main() {
 	// Загружаем переменные окружения из файла .env
@@ -28,7 +35,7 @@ func main() {
 	if discordToken == "" {
 		log.Fatalf("Токен Discord не найдены в .env файле")
 	} else {
-
+		DBot.Connect(discordToken)
 	}
 
 	if telegramToken == "" {
