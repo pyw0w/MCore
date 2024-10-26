@@ -1,4 +1,4 @@
-package telegram
+package cmds
 
 import (
 	TBot "MiniCore/Core/Telegram"

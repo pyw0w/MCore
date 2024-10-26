@@ -8,7 +8,8 @@ import (
 
 	DBot "MiniCore/Core/Discord"
 	TBot "MiniCore/Core/Telegram"
-	CMD "MiniCore/cmd/telegram"
+	DEvent "MiniCore/Modules/discord/events"
+	TCMD "MiniCore/Modules/telegram/cmds"
 	"github.com/joho/godotenv"
 )
 
@@ -38,7 +39,8 @@ func main() {
 		log.Fatalf("Токен Discord не найдены в .env файле")
 	} else {
 		DBot.Connect(discordToken)
-
+		DBot.AddHandler(DEvent.OnReady)
+		DBot.AddHandler(DEvent.OnMessage)
 		DBot.Start()
 	}
 
@@ -47,7 +49,7 @@ func main() {
 	} else {
 		TBot.Connect(telegramToken)
 
-		TBot.Start(CMD.Start)
+		TBot.Start(TCMD.Start)
 	}
 
 	// Обработка CTRL + C

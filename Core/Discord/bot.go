@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	BotID   string
+	_       string
 	Session *discordgo.Session
 )
 
@@ -28,9 +28,7 @@ func Connect(token string) {
 	}
 
 	// Сохраняем ID аккаунта для дальнейшего использования.
-	BotID = u.ID
-
-	log.Println("Бот подключен")
+	_ = u.ID
 }
 
 func Start() {
